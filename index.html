@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Haizel Masongsong — Portfolio</title>
+  <!-- Import a stylish font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg0: #000;
+      --fg: #e9e9e9;
+      --muted: #bdbdbd;
+      --card: rgba(15, 15, 15, .7);
+      --border: rgba(255, 255, 255, .12);
+      --radius: 16px;
+      --pad: 24px;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+      --header-photo-width: 300px;
+      --about-photo-width: 400px;
+      --container-top-padding: 40px;
+      --section-spacing: 50px;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--fg);
+      font: 16px/1.6 system-ui;
+      background: linear-gradient(to bottom, #000000, #ff69b4);
+      overflow-x: hidden;
+    }
+
+    .bg-image {
+      position: fixed; inset: 0; z-index: -2;
+      background: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+      opacity: .18; filter: grayscale(100%) contrast(1.05);
+    }
+
+    .bg-vignette {
+      position: fixed; inset: 0; z-index: -1;
+      background: radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,.06), rgba(0,0,0,.55) 60%, rgba(0,0,0,.85) 100%);
+    }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: var(--container-top-padding) 16px var(--section-spacing); }
+    .muted { color: var(--muted) }
+
+    .title { font-size: clamp(38px, 10vw, 60px); font-weight: 800; margin: 0 0 6px; }
+    .subtitle { font-size: clamp(24px, 8vw, 26px); margin: 0 0 10px; color: #d1d1d1 }
+
+    .grid { display: grid; gap: 16px; }
+
+    @media(min-width:600px) { .grid-2 { grid-template-columns: 1fr 1fr } }
+    @media(max-width:599px) {
+      .header-grid, .about-grid { grid-template-columns: 1fr !important; text-align: center; }
+      .header-grid img, .about-grid img { margin: 0 auto; }
+      .pill-wrap { justify-content: center; }
+    }
+
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); opacity: 0; transform: translateY(30px);
+      transition: all 0.8s ease-out; margin-bottom: var(--section-spacing);
+    }
+    .card.show { opacity: 1; transform: translateY(0); }
+    .card .inner { padding: var(--pad) }
+    .card h2 { margin: 0 0 10px; font-size: 30px }
+
+    /* Featured Songs Styling */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* center all songs */
+      gap: 12px;
+      margin-top: 15px;
+     }
+    .chip {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--fg);
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+   .chip:hover {
+      background: rgba(255, 105, 180, .2);
+      transform: scale(1.1);
+      box-shadow: 0 0 16px rgba(255, 105, 180, .8);
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04); text-decoration: none; color: var(--fg);
+      transition: all .3s ease; font-size: 15px; font-weight: 600;
+    }
+    .pill:hover {
+      background: rgba(255, 105, 180, .2);
+      transform: scale(1.1);
+      box-shadow: 0 0 16px rgba(255, 105, 180, .8);
+    }
+    .pill-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; justify-content: flex-start; }
+
+    .profile-photo { border-radius: var(--radius); max-width: 100%; }
+    .header-grid { display: grid; grid-template-columns: 1fr var(--header-photo-width); align-items: center; gap: 12px; margin-bottom: var(--section-spacing); }
+    .header-grid img { width: 100%; border-radius: var(--radius) }
+    .about-grid { display: grid; grid-template-columns: 1fr var(--about-photo-width); gap: 12px; align-items: center; margin-bottom: var(--section-spacing); }
+    .about-grid img { width: 100%; border-radius: var(--radius) }
+
+    footer { text-align: center; color: #bcbcbc; font-size: 12px; margin-top: var(--section-spacing) }
+  </style>
+</head>
+<body>
+  <div class="bg-image"></div>
+  <div class="bg-vignette"></div>
+
+  <main class="container">
+    <header class="header-grid">
+      <div>
+        <h1 class="title">Haizel Masongsong</h1>
+        <p class="subtitle">Lyricist | AI-Collaborative Creator</p>
+      </div>
+      <img src="profile photo1.png" alt="Full body profile" class="profile-photo" />
+    </header>
+
+    <!-- About Me -->
+    <section class="card">
+      <div class="inner about-grid">
+        <div>
+          <h2>✨ About Me</h2>
+          <p>Hi! I'm Haizel a passionate songwriter who finds joy in turning thoughts, feelings, and stories into lyrics. Though I’m not a professional musician, I’ve released 12 songs so far all created with the help of AI tools that helped bring my words to life.</p>
+          <p>For me, songwriting is a personal form of expression, and I'm always experimenting with new ideas and sounds.</p>
+
+          <!-- Download CV Button -->
+          <a href="Haizel_Masongsong_CV.pdf" download class="pill" style="margin-top:15px; display:inline-block;">
+            📄 Download My CV
+          </a>
+        </div>
+        <img src="about me photo.jpg" alt="About me" />
+      </div>
+    </section>
+
+    <!-- My Music Journey -->
+    <section class="card">
+      <div class="inner">
+        <h2>🎶 My Music Journey</h2>
+        <ul class="list">
+          <li><strong>Started:</strong> 2016</li>
+          <li><strong>Songs Released:</strong> 12</li>
+          <li><strong>Tools Used:</strong> ChatGPT (lyric refinement), Top MediAI (production), RouteNote (distribution)</li>
+          <li><strong>Genres:</strong> Pop, Alternative Rock, Electro-pop, Country, R&amp;B</li>
+          <li><strong>Themes:</strong> Love, Reflection, Dreams, Fantasy, Nostalgia</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Featured Songs -->
+<section class="card">
+  <div class="inner">
+    <h2>📝 Featured Songs</h2>
+    <div class="chips">
+      <a href="https://soundcloud.com/hey-z-957718057/all-about-her" target="_blank" class="chip">All About Her</a>
+      <a href="https://soundcloud.com/hey-z-957718057/just-like-her-smile" target="_blank" class="chip">Just Like Her Smile</a>
+      <a href="https://soundcloud.com/hey-z-957718057/too-soon" target="_blank" class="chip">Too Soon</a>
+      <a href="https://soundcloud.com/hey-z-957718057/kate" target="_blank" class="chip">Kate</a>
+      <a href="https://soundcloud.com/hey-z-957718057/carryitall" target="_blank" class="chip">Carry It All</a>
+      <a href="https://soundcloud.com/hey-z-957718057/allinonyou" target="_blank" class="chip">All In On You</a>
+      <a href="https://soundcloud.com/hey-z-957718057/rant-to-me" target="_blank" class="chip">Rant To Me</a>
+      <a href="https://soundcloud.com/hey-z-957718057/my-bass-girl" target="_blank" class="chip">My Bass Girl</a>
+      <a href="https://soundcloud.com/hey-z-957718057/maybe-someday" target="_blank" class="chip">Maybe Someday</a>
+      <a href="https://soundcloud.com/hey-z-957718057/if-you-never-looked-my-way" target="_blank" class="chip">If You Never Looked My Way</a>
+      <a href="https://soundcloud.com/hey-z-957718057/just-a-friend" target="_blank" class="chip">Just A Friend</a>
+      <a href="https://soundcloud.com/hey-z-957718057/almost-mine" target="_blank" class="chip">Almost Mine</a>
+    </div>
+  </div>
+</section>
+
+
+    <!-- How I Create -->
+    <section class="card">
+      <div class="inner">
+        <h2>🛠️ How I Create</h2>
+        <ol class="list">
+          <li>Lyrics first</li>
+          <li>AI-assisted refinement with ChatGPT</li>
+          <li>Music generation with Top MediAI</li>
+          <li>Tweaking the output to match the mood</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Let's Connect -->
+    <section class="card">
+      <div class="inner">
+        <h2>📫 Let’s Connect</h2>
+        <div class="pill-wrap">
+          <a href="#" class="pill" onclick="window.open('https://facebook.com/heyzmusic0015','_blank')">Facebook</a>
+          <a href="#" class="pill" onclick="window.open('https://instagram.com/heyz.music','_blank')">Instagram</a>
+          <a href="#" class="pill" onclick="window.open('https://tiktok.com/@heyz.music','_blank')">TikTok</a>
+          <a href="#" class="pill" onclick="window.open('https://youtube.com/@heyzmusic15','_blank')">YouTube</a>
+          <a href="#" class="pill" onclick="window.open('https://soundcloud.com/hey-z-957718057','_blank')">SoundCloud</a>
+          <a href="#" class="pill" onclick="window.open('https://open.spotify.com/artist/3bdrCvuKVPYjE3EXEbTTyM','_blank')">Spotify</a>
+          <a href="#" class="pill" onclick="window.open('https://linkedin.com/in/haizel-masongsong-4a4446377/','_blank')">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Note -->
+    <section class="card">
+      <div class="inner center">
+        <h2>💬 Final Note</h2>
+        <p>I write songs because it makes me feel alive. If something I’ve created resonates with you, then that’s more than enough.</p>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Haizel Masongsong • Built with ❤️</footer>
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('show'); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.card').forEach(el => observer.observe(el));
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
